@@ -1,0 +1,29 @@
+<div class="shell-container">
+  <header class="main-header">
+    <div class="logo">
+      <span class="logo-icon">🏦</span>
+      <h1>SecureBank Portal</h1>
+    </div>
+    <nav class="main-nav">
+      <a routerLink="/login" routerLinkActive="active">Login</a>
+      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    </nav>
+    <div class="user-profile">
+      <span class="user-name">Guest User</span>
+      <div class="avatar">GU</div>
+    </div>
+  </header>
+
+  <main class="content-area">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="main-footer">
+    <p>&copy; 2024 SecureBank International. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact Us</a>
+    </div>
+  </footer>
+</div>
