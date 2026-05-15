@@ -5,6 +5,12 @@ const path = require("path");
 module.exports = {
   entry: "./src/index.js",
   mode: "development",
+  output: {
+    publicPath: "http://localhost:4202/",
+    scriptType: "text/javascript",
+    uniqueName: "dashboard",
+    library: { type: "var", name: "dashboard" },
+  },
   devServer: {
     port: 4202,
     historyApiFallback: true,
@@ -38,8 +44,8 @@ module.exports = {
         "./Dashboard": "./src/Dashboard",
       },
       shared: {
-        react: { singleton: true, requiredVersion: "^18.2.0" },
-        "react-dom": { singleton: true, requiredVersion: "^18.2.0" },
+        react: { singleton: true, strictVersion: false },
+        "react-dom": { singleton: true, strictVersion: false },
       },
     }),
     new HtmlWebpackPlugin({

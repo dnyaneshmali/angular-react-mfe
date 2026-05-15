@@ -12,8 +12,9 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () => 
       loadRemoteModule({
-        type: 'module',
+        type: 'script',
         remoteEntry: 'http://localhost:4201/remoteEntry.js',
+        remoteName: 'login',
         exposedModule: './Component'
       }).then(m => m.LoginComponent)
   },

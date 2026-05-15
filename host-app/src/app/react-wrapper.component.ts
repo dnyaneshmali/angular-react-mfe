@@ -15,11 +15,12 @@ export class ReactWrapperComponent implements OnInit {
   private route = inject(ActivatedRoute);
 
   async ngOnInit() {
-    const { remoteEntry, exposedModule } = this.route.snapshot.data;
+    const { remoteEntry, remoteName, exposedModule } = this.route.snapshot.data;
 
     const module = await loadRemoteModule({
-      type: 'module',
+      type: 'script',
       remoteEntry: remoteEntry,
+      remoteName: remoteName,
       exposedModule: exposedModule
     });
 

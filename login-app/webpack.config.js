@@ -4,9 +4,10 @@ const path = require('path');
 
 module.exports = {
   output: {
-    publicPath: "auto",
+    publicPath: "http://localhost:4201/",
     uniqueName: "login",
     scriptType: "text/javascript",
+    library: { type: "var", name: "login" },
   },
   optimization: {
     runtimeChunk: false,
@@ -19,8 +20,9 @@ module.exports = {
         './Component': './src/app/login/login.component.ts',
       },
       shared: {
-        ...shareAll({ singleton: true, strictVersion: false, requiredVersion: 'auto' }),
-        "zone.js": { singleton: true, requiredVersion: 'auto', eager: true },
+        "@angular/core": { singleton: true, strictVersion: false },
+        "@angular/common": { singleton: true, strictVersion: false },
+        "@angular/router": { singleton: true, strictVersion: false },
       },
     }),
   ],
