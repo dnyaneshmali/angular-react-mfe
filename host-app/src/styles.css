@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-color: #002d72; /* Deep Banking Blue */
+  --secondary-color: #005eb8; /* Royal Blue */
+  --accent-color: #d4af37; /* Gold */
+  --text-dark: #1a1a1a;
+  --text-light: #ffffff;
+  --bg-light: #f4f7f9;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+}
+
+* {
+  box-sizing: border-box;
+}

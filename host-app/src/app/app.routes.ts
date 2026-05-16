@@ -1,30 +1,15 @@
 import { Routes } from '@angular/router';
-import { loadRemoteModule } from '@angular-architects/module-federation';
-import { ReactWrapperComponent } from './react-wrapper.component';
+import { loadRemoteModule } from '@angular-architects/native-federation';
 
 export const routes: Routes = [
+  {
+    path: 'login',
+    loadChildren: () =>
+      loadRemoteModule('login', './Routes').then((m) => m.routes),
+  },
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
-  },
-  {
-    path: 'login',
-    loadComponent: () => 
-      loadRemoteModule({
-        type: 'script',
-        remoteEntry: 'http://localhost:4201/remoteEntry.js',
-        remoteName: 'login',
-        exposedModule: './Component'
-      }).then(m => m.LoginComponent)
-  },
-  {
-    path: 'dashboard',
-    component: ReactWrapperComponent,
-    data: {
-      remoteEntry: 'http://localhost:4202/remoteEntry.js',
-      remoteName: 'dashboard',
-      exposedModule: './Dashboard'
-    }
   }
 ];
