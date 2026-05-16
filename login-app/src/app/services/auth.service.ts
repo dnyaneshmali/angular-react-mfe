@@ -22,11 +22,18 @@ const STORAGE_KEY = 'auth_user';
 export class AuthService {
 
   /**
+   * Fetch URL points to the login-app's own origin (port 4201) so users.json
+   * only needs to live in login-app/public — single source of truth regardless
+   * of which host shell is serving the page.
+   */
+  private readonly USERS_URL = 'http://localhost:4201/users.json';
+
+  /**
    * Validates credentials against users.json using native fetch (no HttpClient dependency).
    * Stores the matched user in localStorage and returns them, or null on failure.
    */
   login(username: string, password: string): Observable<LoggedInUser | null> {
-    const fetchPromise = fetch('/users.json')
+    const fetchPromise = fetch(this.USERS_URL)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to load users.json');
         return res.json() as Promise<User[]>;
