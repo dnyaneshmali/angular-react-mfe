@@ -1,13 +1,7 @@
-const { ModuleFederationPlugin } = require('webpack').container;
-const path = require('path');
+const { shareAll, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
 
-module.exports = {
-  output: {
-    publicPath: "auto",
-    uniqueName: "host",
+module.exports = withModuleFederationPlugin({
+  shared: {
+    ...shareAll({ singleton: true, strictVersion: false, requiredVersion: false }),
   },
-  plugins: [
-    new ModuleFederationPlugin({
-    }),
-  ],
-};
+});
