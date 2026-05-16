@@ -4,15 +4,37 @@
       <span class="bank-icon">🏦</span>
       <span class="bank-name">Antigravity <span>Bank</span></span>
     </div>
+
     <nav class="nav-links">
-      <a routerLink="/dashboard">Dashboard</a>
-      <a href="#">Personal</a>
-      <a href="#">Business</a>
-      <a href="#">Invest</a>
-      <a href="#">Support</a>
+      @if (currentUser) {
+        <a routerLink="/dashboard">Dashboard</a>
+        <a href="#">Personal</a>
+        <a href="#">Business</a>
+        <a href="#">Invest</a>
+        <a href="#">Support</a>
+      }
     </nav>
+
     <div class="actions">
-      <button class="btn-login" (click)="onLogin()">Secure Login</button>
+      @if (currentUser) {
+        <!-- Logged in state -->
+        <div class="user-info">
+          <div class="user-avatar" [attr.title]="currentUser.name">
+            {{ currentUser.name.charAt(0).toUpperCase() }}
+          </div>
+          <div class="user-details">
+            <span class="user-name">{{ currentUser.name }}</span>
+            <span class="user-role">{{ getRoleLabel(currentUser.role) }}</span>
+          </div>
+          <button class="btn-logout" (click)="onLogout()" id="logout-btn" title="Logout">
+            <span>Logout</span>
+            <span class="logout-icon">↪</span>
+          </button>
+        </div>
+      } @else {
+        <!-- Logged out state -->
+        <button class="btn-login" id="login-nav-btn" (click)="onLogin()">Secure Login</button>
+      }
     </div>
   </div>
 </header>

@@ -1,28 +1,95 @@
 <div class="login-container">
   <div class="login-card">
     <div class="login-header">
+      <div class="logo-icon">🏦</div>
       <h2>Welcome Back</h2>
       <p>Securely log in to your account</p>
     </div>
-    <form class="login-form">
+
+    <form class="login-form" (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
+
+      <!-- Error Alert -->
+      @if (errorMessage) {
+        <div class="alert alert-error" role="alert">
+          <span class="alert-icon">⚠️</span>
+          {{ errorMessage }}
+        </div>
+      }
+
       <div class="form-group">
-        <label for="username">Username or Email</label>
-        <input type="text" id="username" placeholder="Enter your credentials">
+        <label for="username">Username</label>
+        <div class="input-wrapper">
+          <span class="input-icon">👤</span>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            [(ngModel)]="username"
+            placeholder="Enter your username"
+            [class.input-error]="errorMessage"
+            autocomplete="username"
+            required
+          />
+        </div>
       </div>
+
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" placeholder="••••••••">
+        <div class="input-wrapper">
+          <span class="input-icon">🔒</span>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            name="password"
+            [(ngModel)]="password"
+            placeholder="••••••••"
+            [class.input-error]="errorMessage"
+            autocomplete="current-password"
+            required
+          />
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="togglePasswordVisibility()"
+            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+          >
+            {{ showPassword ? '🙈' : '👁️' }}
+          </button>
+        </div>
       </div>
+
       <div class="form-options">
         <label class="remember-me">
-          <input type="checkbox"> Remember me
+          <input type="checkbox" name="rememberMe" [(ngModel)]="rememberMe" />
+          <span class="checkmark"></span>
+          Remember me
         </label>
         <a href="#" class="forgot-password">Forgot password?</a>
       </div>
-      <button type="button" class="btn-submit">Login Securely</button>
+
+      <button
+        type="submit"
+        class="btn-submit"
+        id="login-submit-btn"
+        [disabled]="isLoading"
+        [class.loading]="isLoading"
+      >
+        @if (isLoading) {
+          <span class="spinner"></span>
+          Authenticating...
+        } @else {
+          Login Securely
+        }
+      </button>
     </form>
+
     <div class="login-footer">
       <p>Don't have an account? <a href="#">Open one today</a></p>
+    </div>
+
+    <div class="demo-hint">
+      <p><strong>Demo credentials:</strong></p>
+      <p>admin / admin123 &nbsp;|&nbsp; john.doe / john&#64;123 &nbsp;|&nbsp; jane.smith / jane&#64;456</p>
     </div>
   </div>
 </div>
